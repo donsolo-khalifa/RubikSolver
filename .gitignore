@@ -3,6 +3,7 @@ backend/.venv/
 __pycache__/
 *.pyc
 .pytest_cache/
+backend/.env
 backend/colors.json
 backend/debug.png
 

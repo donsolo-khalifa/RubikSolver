@@ -1,10 +1,14 @@
-"""Runtime settings. Override any of them with environment variables of the same name."""
+"""Runtime settings. Override any of them in ``backend/.env`` or with environment variables
+of the same name (a variable set in the shell wins over the file)."""
 from __future__ import annotations
 
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BACKEND_DIR = Path(__file__).resolve().parent.parent
+load_dotenv(BACKEND_DIR / ".env", override=False)
 
 
 def _env(name: str, default: str) -> str:

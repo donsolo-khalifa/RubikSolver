@@ -26,16 +26,16 @@ npm install
 
 1. Start Iriun on the phone and PC, then find its camera index:
    `python tools/list_cameras.py` (from `backend/`).
-2. Start the backend, telling it which camera to use:
+2. Copy `backend/.env.example` to `backend/.env` and set `CAMERA_SOURCE` to that index (for example `CAMERA_SOURCE=1`).
+3. Start the backend:
    ```sh
    cd backend
-   set CAMERA_SOURCE=1               # PowerShell: $env:CAMERA_SOURCE=1
    python -m app.main                # http://127.0.0.1:8000
    ```
-3. Start the frontend dev server: `cd frontend && npm run dev`, then open the URL it prints.
+4. Start the frontend dev server: `cd frontend && npm run dev`, then open the URL it prints.
    Or run `npm run build` once; the backend then serves the app itself at http://127.0.0.1:8000.
 
-Settings are environment variables, defined in [backend/app/config.py](backend/app/config.py):
+Settings go in `backend/.env` (see [backend/.env.example](backend/.env.example)); an environment variable set in the shell overrides the file. They are read in [backend/app/config.py](backend/app/config.py):
 
 | Variable | Default | Meaning |
 |----------|---------|---------|

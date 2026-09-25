@@ -33,15 +33,28 @@ class ScanStep:
 
 
 def _scan_steps() -> list[ScanStep]:
+    """Prompts for each step, worded from the user's side of the cube.
+
+    The user holds the cube between themselves and the camera, so the camera's right is the
+    user's left. Each quarter turn (y) brings the face on the camera's right, which is on the
+    user's LEFT, round to face the camera. The prompts name that face rather than a turning
+    direction, which is ambiguous when you and the camera face each other.
+    """
     n = {f: COLOR_NAMES[c] for f, c in SCHEME.items()}
+
+    def swing(face: str) -> str:
+        return f"The {n[face]} face is on your left: turn the whole cube so it swings round to face the camera."
+
     # Every captured image already matches the net orientation (PLAN.md 6.2).
     return [
         ScanStep("F", None, f"Hold the cube with {n['U']} on top and {n['F']} facing the camera."),
-        ScanStep("R", "y", f"Turn the whole cube to the left so the {n['R']} face is facing the camera."),
-        ScanStep("B", "y", f"Turn the whole cube to the left again so the {n['B']} face is facing the camera."),
-        ScanStep("L", "y", f"Turn it to the left once more so the {n['L']} face is facing the camera."),
-        ScanStep("U", "y x'", f"Turn it left again (back to {n['F']}), then tip the top towards the camera so {n['U']} faces it."),
-        ScanStep("D", "x2", f"Flip the cube over, top away from you, so {n['D']} faces the camera."),
+        ScanStep("R", "y", swing("R")),
+        ScanStep("B", "y", swing("B")),
+        ScanStep("L", "y", swing("L")),
+        ScanStep("U", "y x'", f"Turn it the same way once more so {n['F']} faces the camera again, "
+                              f"then tip the top towards the camera so {n['U']} faces it."),
+        ScanStep("D", "x2", f"Keep tipping the top towards the camera, two more times, "
+                            f"until {n['D']} (now facing you) faces the camera."),
     ]
 
 
@@ -146,10 +159,11 @@ class ScanSession:
         order = [s.face for s in SCAN_STEPS[:4]]
         if shown in order and face in order:
             diff = (order.index(shown) - order.index(face)) % 4
+            # Directions are from the user's side: the camera's left is the user's right.
             if diff == 1:
-                return f"That's the {got} face; turn the cube back one step (to the right) to show {want}."
+                return f"That's the {got} face; you went one step too far. Turn back: the {want} face is on your right."
             if diff == 3:
-                return f"That's the {got} face; turn the cube one more step to the left to show {want}."
+                return f"That's the {got} face; you turned the other way. The {want} face is on your left."
         return f"That's the {got} face. Show the {want} face: {SCAN_STEPS[self.step].text}"
 
     def _capture(self, labs: np.ndarray, colors: list[str | None]) -> list[BaseModel]:

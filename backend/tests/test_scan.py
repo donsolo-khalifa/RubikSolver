@@ -102,7 +102,7 @@ def test_wrong_face_is_reported():
     s.start_scan()
     cols = ["R"] * 9  # red face shown when green is expected
     msgs = s.on_frame(*_stable(cols, np.array([refs["R"]] * 9)))
-    assert isinstance(msgs[0], P.ScanErrorMsg) and "back one step" in msgs[0].message
+    assert isinstance(msgs[0], P.ScanErrorMsg) and "on your right" in msgs[0].message
     assert s.step == 0
 
 

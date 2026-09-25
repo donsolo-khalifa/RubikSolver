@@ -18,21 +18,34 @@ pip install -r requirements.txt
 Frontend (Node 20+):
 
 ```sh
+# in a new termminal
 cd frontend
 npm install
 ```
 
 ## Running
 
+Run the backend commands in `backend/` with the virtual environment active (`.venv\Scripts\activate`).
+
 1. Start Iriun on the phone and PC, then find its camera index:
-   `python tools/list_cameras.py` (from `backend/`).
-2. Copy `backend/.env.example` to `backend/.env` and set `CAMERA_SOURCE` to that index (for example `CAMERA_SOURCE=1`).
-3. Start the backend:
    ```sh
    cd backend
+   python tools/list_cameras.py
+   ```
+2. Create your settings file from the example:
+   ```sh
+   copy .env.example .env            # Windows (cp .env.example .env elsewhere)
+   ```
+   Open `backend/.env` and set `CAMERA_SOURCE` to the index from step 1 (for example `CAMERA_SOURCE=1`). If your cube is not the standard colour scheme, set `COLOR_SCHEME` too (see the table below).
+3. Start the backend:
+   ```sh
    python -m app.main                # http://127.0.0.1:8000
    ```
-4. Start the frontend dev server: `cd frontend && npm run dev`, then open the URL it prints.
+4. In a second terminal, start the frontend dev server and open the URL it prints:
+   ```sh
+   cd frontend
+   npm run dev
+   ```
    Or run `npm run build` once; the backend then serves the app itself at http://127.0.0.1:8000.
 
 Settings go in `backend/.env` (see [backend/.env.example](backend/.env.example)); an environment variable set in the shell overrides the file. They are read in [backend/app/config.py](backend/app/config.py):
@@ -84,3 +97,7 @@ They cover: the cube model (every move against Kociemba's own example); 500 rand
 - **Yellow face not photographed yet.** It should have 1 red, 2 blue, 4 yellow and 2 green stickers (worked out from the colour counts of the other five faces).
 - **Move counts** are higher than first estimated: median 156 (Beginner), 131 (Intermediate), 21 (Advanced) over 300 scrambles. Intermediate reuses the Beginner first two layers, which alone take about 90 moves.
 - Stretch goals (AR arrows on the video, camera-based move verification, algorithm trainer) are not built yet.
+
+## License
+
+[MIT](LICENSE)

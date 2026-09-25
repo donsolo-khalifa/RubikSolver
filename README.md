@@ -41,6 +41,7 @@ Settings go in `backend/.env` (see [backend/.env.example](backend/.env.example))
 |----------|---------|---------|
 | `CAMERA_SOURCE` | `0` | Webcam index, or a path to a video file to replay |
 | `COLOR_SCHEME` | `U=W,R=R,F=G,D=Y,L=O,B=B` | Colour on each face in the first scan's hold (top, right, front, bottom, left, back); set it if your cube is not the standard scheme |
+| `CAMERA_WIDTH` / `CAMERA_HEIGHT` | `1280` / `720` | Requested camera resolution |
 | `FLIP_HORIZONTAL` | `0` | Set to `1` if Iriun mirrors the picture |
 | `LOOP_VIDEO` | `1` | Loop a video-file source |
 | `MIN_SHARPNESS` | `10` | Blur threshold for capture (see *Known limitations*) |
@@ -58,12 +59,12 @@ Practice mode and the "How to read moves" introduction work without a camera.
 | `record.py` | Records a scanning session to `.mp4`, for replay and tests |
 | `scan_terminal.py` | Guided scan in an OpenCV window, then prints a solution (no browser) |
 
-A recorded session can stand in for the camera: `CAMERA_SOURCE=tests/fixtures/scan1.mp4`.
+A session recorded with `record.py` can stand in for the camera, for example `CAMERA_SOURCE=recordings/scan1.mp4`.
 
 ## Tests
 
 ```sh
-cd backend && python -m pytest          # 184 tests
+cd backend && python -m pytest          # 186 tests
 cd frontend && npm test                 # 13 tests; npm run typecheck for tsc
 ```
 
@@ -74,7 +75,7 @@ They cover: the cube model (every move against Kociemba's own example); 500 rand
 - **Vision** (`app/vision/`): sticker candidates come from Canny contours and from bright blobs enclosed by the black cube body (the second source survives motion blur). A 3x3 grid is fitted by anchoring each candidate at each of the 9 cells, so the fit works even when the centre sticker is missed. A RANSAC homography warps the face to 300×300, and the inner half of each cell is sampled with glare masked out.
 - **Colour**: stickers are compared in a feature space where chroma saturates. Hue always counts fully, so a sticker washed out by glare stays next to its real colour instead of drifting to white. After all six faces are in, every sticker is assigned together so each colour gets exactly 9 (`linear_sum_assignment`).
 - **Solvers** (`app/solver/`): a geometric 54-facelet model (face, wide and slice moves, rotations). Beginner and Intermediate run on a stage engine: search or procedure per stage, case recognition for the last layer. Every solution is replayed on the model and checked before it is sent.
-- **Frontend** (`frontend/src/`): Three.js cube with a move queue and snapping, curved arrows, stage cards with previews and algorithm cards, speech (on by default), keyboard control (Space/→ next, ← back, R show again, P auto-play).
+- **Frontend** (`frontend/src/`): Three.js cube with a move queue and snapping, curved arrows, stage cards with previews and algorithm cards, speech (on by default), keyboard control (Space captures a face while scanning; when solving, Space/→ next, ← back, R show again, P auto-play).
 
 ## Known limitations and next steps
 

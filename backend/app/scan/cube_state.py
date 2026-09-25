@@ -5,12 +5,13 @@ from collections import Counter
 from dataclasses import dataclass, field
 from itertools import product
 
+from .. import config
 from ..solver.cube_model import CORNERS, EDGES, FACES
 
 COLORS = "WYROGB"
 COLOR_NAMES = {"W": "white", "Y": "yellow", "R": "red", "O": "orange", "G": "green", "B": "blue"}
-# Standard colour scheme with the cube held white on top, green facing the camera.
-SCHEME = {"U": "W", "R": "R", "F": "G", "D": "Y", "L": "O", "B": "B"}
+# Colour on each face with the cube held as for the first scan (COLOR_SCHEME in .env).
+SCHEME: dict[str, str] = config.COLOR_SCHEME
 FACE_NAMES = {"U": "top", "R": "right", "F": "front", "D": "bottom", "L": "left", "B": "back"}
 
 

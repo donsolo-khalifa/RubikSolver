@@ -33,7 +33,7 @@ export type ServerMsg =
   | { type: "cube_state"; facelets: string; valid: boolean; errors: string[]; note: string | null }
   | { type: "solution"; method: Method; stages: Stage[]; totalMoves: number; facelets: string }
   | { type: "practice"; scramble: string[]; facelets: string }
-  | { type: "status"; camera: boolean; phase: Phase }
+  | { type: "status"; camera: boolean; phase: Phase; scheme: Record<Face, Color> }
   | { type: "error"; message: string };
 
 export type ClientMsg =
@@ -47,7 +47,8 @@ export type ClientMsg =
 
 export type SolutionMsg = Extract<ServerMsg, { type: "solution" }>;
 
-// Standard scheme with the cube held white on top, green facing the camera.
+// Colour on each face with the cube held as for the first scan. Starts as the standard
+// scheme and is replaced by the backend's COLOR_SCHEME when the status message arrives.
 export const SCHEME: Record<Face, Color> = { U: "W", R: "R", F: "G", D: "Y", L: "O", B: "B" };
 export const FACES: Face[] = ["U", "R", "F", "D", "L", "B"];
 export const COLOR_NAMES: Record<Color, string> = {
@@ -57,3 +58,6 @@ export const COLOR_HEX: Record<Color, string> = {
   W: "#f4f4f0", Y: "#ffd500", R: "#d0203a", O: "#ff6a13", G: "#1faa55", B: "#1466d8",
 };
 export const UNKNOWN_HEX = "#4a4f59";
+
+/** Colour name on a face of the scan hold, e.g. faceColorName("U") -> "white". */
+export const faceColorName = (f: Face): string => COLOR_NAMES[SCHEME[f]];

@@ -91,3 +91,14 @@ def test_every_intermediate_case_is_reached():
         used.update({m.algorithm for st in sol.stages[4:] for m in st.moves if m.algorithm})
     names = {a.name for a in [A.OLL_LINE, A.OLL_L, *A.OLL_CORNERS, *A.PLL_CORNERS, *A.PLL_EDGES]}
     assert names <= set(used), names - set(used)
+
+
+def test_stage_texts_use_the_cube_colours():
+    scheme = {"U": "W", "R": "O", "F": "Y", "D": "G", "L": "R", "B": "B"}
+    sol = solve(scrambled(random.Random(3)), "beginner", scheme)
+    names = [s.name for s in sol.stages]
+    assert names[1] == "White cross" and names[4] == "Green cross"
+    text = " ".join(s.goal + s.explanation + " ".join(s.tips) for s in sol.stages)
+    assert "{" not in text and "yellow" not in text
+    adv = solve(scrambled(random.Random(3)), "advanced", scheme)
+    assert "white on top and yellow facing you" in adv.stages[0].tips[0]

@@ -32,15 +32,20 @@ class ScanStep:
     text: str
 
 
-# Every captured image already matches the net orientation (PLAN.md 6.2).
-SCAN_STEPS = [
-    ScanStep("F", None, "Hold the cube with white on top and green facing the camera."),
-    ScanStep("R", "y", "Turn the whole cube to the left so the red face is facing the camera."),
-    ScanStep("B", "y", "Turn the whole cube to the left again so the blue face is facing the camera."),
-    ScanStep("L", "y", "Turn it to the left once more so the orange face is facing the camera."),
-    ScanStep("U", "y x'", "Turn it left again (back to green), then tip the top towards the camera so white faces it."),
-    ScanStep("D", "x2", "Flip the cube over, top away from you, so yellow faces the camera."),
-]
+def _scan_steps() -> list[ScanStep]:
+    n = {f: COLOR_NAMES[c] for f, c in SCHEME.items()}
+    # Every captured image already matches the net orientation (PLAN.md 6.2).
+    return [
+        ScanStep("F", None, f"Hold the cube with {n['U']} on top and {n['F']} facing the camera."),
+        ScanStep("R", "y", f"Turn the whole cube to the left so the {n['R']} face is facing the camera."),
+        ScanStep("B", "y", f"Turn the whole cube to the left again so the {n['B']} face is facing the camera."),
+        ScanStep("L", "y", f"Turn it to the left once more so the {n['L']} face is facing the camera."),
+        ScanStep("U", "y x'", f"Turn it left again (back to {n['F']}), then tip the top towards the camera so {n['U']} faces it."),
+        ScanStep("D", "x2", f"Flip the cube over, top away from you, so {n['D']} faces the camera."),
+    ]
+
+
+SCAN_STEPS = _scan_steps()
 
 
 @dataclass
@@ -132,7 +137,7 @@ class ScanSession:
         return P.ScanPromptMsg(step=self.step, face=s.face, rotation=s.rotation, text=s.text)
 
     def status(self, camera: bool) -> P.StatusMsg:
-        return P.StatusMsg(camera=camera, phase=self.phase)  # type: ignore[arg-type]
+        return P.StatusMsg(camera=camera, phase=self.phase, scheme=SCHEME)  # type: ignore[arg-type]
 
     def _wrong_centre_text(self, centre: str, face: str) -> str:
         want = COLOR_NAMES[SCHEME[face]]

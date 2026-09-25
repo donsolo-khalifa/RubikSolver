@@ -54,7 +54,7 @@ INTERMEDIATE_STAGES = [
     *FIRST_TWO_LAYERS,
     StageDef(
         name="OLL edges",
-        goal="Make a yellow cross on top (2-look OLL, step 1)",
+        goal="Make a {last} cross on top (2-look OLL, step 1)",
         explanation=(
             "Ignore the corners. For a line, hold it left to right and use the line algorithm. "
             "For an L-shape, hold it at the back and left and use the L algorithm. "
@@ -67,9 +67,9 @@ INTERMEDIATE_STAGES = [
     ),
     StageDef(
         name="OLL corners",
-        goal="Make the whole top yellow (2-look OLL, step 2)",
+        goal="Make the whole top {last} (2-look OLL, step 2)",
         explanation=(
-            "Count the yellow corners on top and look where the other corners' yellow stickers point. "
+            "Count the {last} corners on top and look where the other corners' {last} stickers point. "
             "That tells you which of the 7 cases you have: Sune, Antisune, H, Pi, Headlights, T or "
             "Bowtie. Turn the top to the case's starting position and do its algorithm."
         ),

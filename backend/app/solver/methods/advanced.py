@@ -35,7 +35,7 @@ def solve(state: State) -> Solution:
             "This is the computer's shortest-ish solution. It doesn't follow human steps, "
             "so just follow each move carefully."
         ),
-        tips=["Keep the cube with white on top and green facing you the whole time."],
+        tips=["Keep the cube with {first} on top and {front} facing you the whole time."],
         moves=[Move(m, describe(m)) for m in moves],
     )
     return Solution("advanced", [stage])

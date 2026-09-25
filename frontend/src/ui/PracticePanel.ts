@@ -1,6 +1,6 @@
 // Practice mode (no camera): the server scrambles a virtual cube and solves it.
 import { SOLVED } from "../cube/facelets";
-import type { Method } from "../net/protocol";
+import { faceColorName as name, type Method } from "../net/protocol";
 import type { App } from "./app";
 import { faceLetterColor } from "./diagrams";
 import { h, type Panel } from "./dom";
@@ -20,7 +20,7 @@ export class PracticePanel implements Panel {
     this.el.append(
       h("h2", {}, "Practice"),
       h("p", {}, "The app scrambles the cube on screen, then walks you through solving it. " +
-        "To practise on your real cube too, start from a solved cube (white on top, green in front) and do the scramble shown below."),
+        `To practise on your real cube too, start from a solved cube (${name("U")} on top, ${name("F")} in front) and do the scramble shown below.`),
       h("h3", {}, "Choose a method"),
       methodPicker(this.method, (m) => (this.method = m)),
       h("div", { class: "row" }, this.button),

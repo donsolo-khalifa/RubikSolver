@@ -26,6 +26,27 @@ FLIP_HORIZONTAL = _env("FLIP_HORIZONTAL", "0") == "1"
 # Loop a video file source instead of stopping at its end.
 LOOP_VIDEO = _env("LOOP_VIDEO", "1") == "1"
 
+# Your cube's colours, as seen when you hold it for the first scan: which colour is on each
+# face (U = top, F = facing the camera, R = right, L = left, B = back, D = bottom).
+# Colours: W white, Y yellow, R red, O orange, G green, B blue.
+STANDARD_SCHEME = "U=W,R=R,F=G,D=Y,L=O,B=B"
+
+
+def parse_scheme(text: str) -> dict[str, str]:
+    scheme = {}
+    for part in text.replace(" ", "").split(","):
+        face, _, colour = part.partition("=")
+        scheme[face.upper()] = colour.upper()
+    if sorted(scheme) != sorted("URFDLB") or sorted(scheme.values()) != sorted("WYROGB"):
+        raise ValueError(
+            f"COLOR_SCHEME={text!r} must give each face U R F D L B a different colour of W Y R O G B, "
+            f"for example {STANDARD_SCHEME}"
+        )
+    return scheme
+
+
+COLOR_SCHEME = parse_scheme(_env("COLOR_SCHEME", STANDARD_SCHEME))
+
 # Detection runs on a copy downscaled to this width; colours are sampled at full resolution.
 DETECT_WIDTH = 640
 

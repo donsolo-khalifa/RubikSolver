@@ -40,6 +40,7 @@ Settings go in `backend/.env` (see [backend/.env.example](backend/.env.example))
 | Variable | Default | Meaning |
 |----------|---------|---------|
 | `CAMERA_SOURCE` | `0` | Webcam index, or a path to a video file to replay |
+| `COLOR_SCHEME` | `U=W,R=R,F=G,D=Y,L=O,B=B` | Colour on each face in the first scan's hold (top, right, front, bottom, left, back); set it if your cube is not the standard scheme |
 | `FLIP_HORIZONTAL` | `0` | Set to `1` if Iriun mirrors the picture |
 | `LOOP_VIDEO` | `1` | Loop a video-file source |
 | `MIN_SHARPNESS` | `10` | Blur threshold for capture (see *Known limitations*) |

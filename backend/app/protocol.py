@@ -85,6 +85,7 @@ class StatusMsg(BaseModel):
     type: Literal["status"] = "status"
     camera: bool
     phase: Literal["idle", "scanning", "review", "solving"]
+    scheme: dict[Face, Color]  # colour on each face in the first scan's hold
 
 
 class ErrorMsg(BaseModel):

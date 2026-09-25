@@ -125,3 +125,11 @@ def test_practice():
     msgs = s.practice("intermediate", random.Random(2))
     assert isinstance(msgs[0], P.PracticeMsg) and isinstance(msgs[1], P.SolutionMsg)
     assert cm.is_solved(cm.apply(msgs[0].facelets, [m.notation for st in msgs[1].stages for m in st.moves]))
+
+
+def test_scheme_setting():
+    from app import config
+    import pytest
+    assert config.parse_scheme("U=W, R=O, F=Y, D=G, L=R, B=B")["F"] == "Y"
+    with pytest.raises(ValueError):
+        config.parse_scheme("U=W,R=O,F=Y,D=G,L=R,B=R")

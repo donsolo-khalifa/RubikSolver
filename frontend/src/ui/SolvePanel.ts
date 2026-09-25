@@ -3,7 +3,7 @@ import { applyMoves } from "../cube/facelets";
 import { invertMove, isRotation } from "../cube/notation";
 import { describe, progressLabel } from "../guidance/describe";
 import { speech } from "../guidance/speech";
-import type { Move, SolutionMsg } from "../net/protocol";
+import { faceColorName as name, type Move, type SolutionMsg } from "../net/protocol";
 import type { App } from "./app";
 import { faceLetterColor, isoSvg } from "./diagrams";
 import { h, richText, type Panel } from "./dom";
@@ -222,8 +222,8 @@ export class SolvePanel implements Panel {
     const flips = this.sol.method !== "advanced";
     return h("div", { class: "card" },
       h("h3", {}, "Get ready"),
-      h("p", { html: "Hold your cube with <strong>white on top</strong> and <strong>green facing you</strong>, just like the cube on screen." }),
-      flips ? h("p", { html: "The very first move turns the whole cube upside down (<code>z2</code>), so yellow ends up on top. Beginner guides are written that way." }) : null,
+      h("p", { html: `Hold your cube with <strong>${name("U")} on top</strong> and <strong>${name("F")} facing you</strong>, just like the cube on screen.` }),
+      flips ? h("p", { html: `The very first move turns the whole cube upside down (<code>z2</code>), so ${name("D")} ends up on top and you build the ${name("U")} layer on the bottom. Beginner guides are written that way.` }) : null,
       h("p", { class: "muted" }, "Each move shows as a yellow arrow on the 3D cube. Do it on your real cube, then press Next (or Space). ← goes back, R shows the move again."),
       h("div", { class: "row" }, h("button", { class: "primary big", onclick: () => this.start() }, "Start")),
     );

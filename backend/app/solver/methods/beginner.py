@@ -78,8 +78,8 @@ def _twist_corners(b: Builder) -> None:
 BEGINNER_STAGES = [
     *FIRST_TWO_LAYERS,
     StageDef(
-        name="Yellow cross",
-        goal="Make a yellow plus sign on top",
+        name="{Last} cross",
+        goal="Make a {last} plus sign on top",
         explanation=(
             "Look at the top face and ignore the corners. You will see a dot, an L-shape, a line or "
             "the cross. For the L, turn the top so it points to the back and left; for the line, "
@@ -91,7 +91,7 @@ BEGINNER_STAGES = [
         algorithm=YELLOW_CROSS.name,
     ),
     StageDef(
-        name="Yellow edges",
+        name="{Last} edges",
         goal="Make each top edge match the centre of its side",
         explanation=(
             "Turn the top until two neighbouring edges match their centres. Hold the cube so those "
@@ -103,7 +103,7 @@ BEGINNER_STAGES = [
         algorithm=SUNE.name,
     ),
     StageDef(
-        name="Place yellow corners",
+        name="Place {last} corners",
         goal="Put each top corner in its correct spot (it may still be twisted)",
         explanation=(
             "A corner is in its spot when its three colours match the three centres around it, in "
@@ -115,11 +115,11 @@ BEGINNER_STAGES = [
         algorithm=CORNER_CYCLE.name,
     ),
     StageDef(
-        name="Twist yellow corners",
+        name="Twist {last} corners",
         goal="Solve the cube",
         explanation=(
             "Hold the cube with a twisted corner at the front-right top. Repeat R' D' R D until its "
-            "yellow sticker faces up (2 or 4 times). Then turn only the top (U) to bring the next "
+            "{last} sticker faces up (2 or 4 times). Then turn only the top (U) to bring the next "
             "twisted corner to the front-right, and repeat. Never turn the whole cube during this "
             "stage. Finish by turning the top to line everything up."
         ),

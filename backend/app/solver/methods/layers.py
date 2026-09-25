@@ -196,10 +196,10 @@ def _middle_layer(b: Builder) -> None:
 
 DAISY = StageDef(
     name="Daisy",
-    goal="Put the 4 white edge pieces around the yellow centre on top, like petals of a flower",
+    goal="Put the 4 {first} edge pieces around the {last} centre on top, like petals of a flower",
     explanation=(
-        "First, turn the whole cube upside down so yellow is on top and white on the bottom. "
-        "Then bring each white edge piece up so its white sticker faces up next to the yellow centre. "
+        "First, turn the whole cube upside down so {last} is on top and {first} on the bottom. "
+        "Then bring each {first} edge piece up so its {first} sticker faces up next to the {last} centre. "
         "Before you bring up a new petal, turn the top so an empty spot is above it, so you don't knock "
         "an existing petal off."
     ),
@@ -210,8 +210,8 @@ DAISY = StageDef(
 )
 
 WHITE_CROSS = StageDef(
-    name="White cross",
-    goal="Make a white plus sign on the bottom, with each edge matching the side centre",
+    name="{First} cross",
+    goal="Make a {first} plus sign on the bottom, with each edge matching the side centre",
     explanation=(
         "Look at a petal's side sticker. Turn the top until that sticker sits above the centre of "
         "the same colour, then turn that side twice so the petal flips down to the bottom."
@@ -222,24 +222,24 @@ WHITE_CROSS = StageDef(
 )
 
 WHITE_CORNERS = StageDef(
-    name="White corners",
-    goal="Complete the whole white layer on the bottom",
+    name="{First} corners",
+    goal="Complete the whole {first} layer on the bottom",
     explanation=(
-        "Find a corner with white on top. Turn the whole cube so the slot it belongs in is at the "
+        "Find a corner with {first} on top. Turn the whole cube so the slot it belongs in is at the "
         "front-right bottom, turn the top so the corner is right above that slot, then repeat "
-        "R U R' U' until it drops in with white facing down (1, 3 or 5 times)."
+        "R U R' U' until it drops in with {first} facing down (1, 3 or 5 times)."
     ),
     run=_white_corners,
     check=first_layer_done,
     algorithm=CORNER_INSERT.name,
-    tips=["If a white corner is stuck in the bottom in the wrong place, do R U R' U' once to lift it out."],
+    tips=["If a {first} corner is stuck in the bottom in the wrong place, do R U R' U' once to lift it out."],
 )
 
 MIDDLE_LAYER = StageDef(
     name="Middle layer",
     goal="Fill in the 4 edges of the middle layer",
     explanation=(
-        "Find a top edge with no yellow on it. Turn the cube and the top so its front sticker "
+        "Find a top edge with no {last} on it. Turn the cube and the top so its front sticker "
         "matches the front centre, making an upside-down T. If its top sticker matches the right "
         "centre, use the right algorithm; if it matches the left, use the left one."
     ),

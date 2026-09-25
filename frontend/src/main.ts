@@ -2,7 +2,7 @@ import "./style.css";
 import { CubeView } from "./cube/CubeView";
 import { SOLVED } from "./cube/facelets";
 import { speech } from "./guidance/speech";
-import type { Face } from "./net/protocol";
+import { SCHEME, type Face } from "./net/protocol";
 import { Socket } from "./net/socket";
 import type { App } from "./ui/app";
 import { faceLetterColor } from "./ui/diagrams";
@@ -83,6 +83,10 @@ function homePanel(): Panel {
 // --- routing on server messages ------------------------------------------------
 socket.on("status", (m) => {
   app.cameraOk = m.camera;
+  const changed = (Object.keys(m.scheme) as Face[]).some((f) => SCHEME[f] !== m.scheme[f]);
+  Object.assign(SCHEME, m.scheme);
+  // Redraw with the cube's real colours if the first screen was drawn with the defaults.
+  if (changed && (mode === "home" || mode === "practice")) mode === "home" ? app.home() : app.startPractice();
   document.body.classList.toggle("no-camera", !m.camera);
 });
 socket.on("cube_state", (m) => {

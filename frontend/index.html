@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cube Coach</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23000'/%3E%3Crect x='3' y='3' width='8' height='8' rx='2' fill='%23ffc629'/%3E%3Crect x='12' y='3' width='8' height='8' rx='2' fill='%231466d8'/%3E%3Crect x='21' y='3' width='8' height='8' rx='2' fill='%23ffc629'/%3E%3Crect x='3' y='12' width='8' height='8' rx='2' fill='%23d0203a'/%3E%3Crect x='12' y='12' width='8' height='8' rx='2' fill='%23f4f4f0'/%3E%3Crect x='21' y='12' width='8' height='8' rx='2' fill='%231466d8'/%3E%3Crect x='3' y='21' width='8' height='8' rx='2' fill='%231faa55'/%3E%3Crect x='12' y='21' width='8' height='8' rx='2' fill='%23d0203a'/%3E%3Crect x='21' y='21' width='8' height='8' rx='2' fill='%231faa55'/%3E%3C/svg%3E" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button id="home" class="brand" title="Home">
+        <span class="logo" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+        Cube Coach
+      </button>
+      <div class="spacer"></div>
+      <span id="conn" class="conn" title="Connecting…"></span>
+      <button id="help" class="ghost">How to read moves</button>
+      <button id="speaker" class="icon" aria-pressed="true"></button>
+    </header>
+    <main class="layout">
+      <section class="stage">
+        <div id="cube" class="cube-view" aria-label="3D cube"></div>
+        <button id="reset-view" class="ghost small reset-view" title="Reset the camera view">Reset view</button>
+      </section>
+      <aside id="panel" class="side"></aside>
+    </main>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

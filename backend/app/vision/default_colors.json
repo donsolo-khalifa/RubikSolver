@@ -1,0 +1,9 @@
+{
+  "_comment": "Median LAB (OpenCV 8-bit) of each colour in referenceImages/. Replace by running tools/calibrate_colors.py.",
+  "W": [233, 127, 125],
+  "Y": [218, 115, 213],
+  "R": [121, 198, 169],
+  "O": [144, 181, 187],
+  "G": [196, 75, 197],
+  "B": [140, 143, 63]
+}

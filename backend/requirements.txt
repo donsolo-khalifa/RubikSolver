@@ -1,0 +1,10 @@
+opencv-python>=4.9
+cvzone>=1.6
+numpy>=1.26
+scipy>=1.12
+kociemba>=1.2
+fastapi>=0.110
+uvicorn[standard]>=0.29
+pydantic>=2.6
+pytest>=8
+httpx>=0.27

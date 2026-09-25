@@ -1,0 +1,12 @@
+{
+  "_comment": "Hand labels for referenceImages/ (PLAN.md 5.0), read row by row as in the photos. The yellow face has not been photographed yet.",
+  "images": {
+    "WhatsApp Image 2026-09-25 at 2.22.43 AM.jpeg":     {"centre": "R", "stickers": "RBRBRRRYO"},
+    "WhatsApp Image 2026-09-25 at 2.23.08 AM (5).jpeg": {"centre": "R", "stickers": "RBRBRRRYO"},
+    "WhatsApp Image 2026-09-25 at 2.23.08 AM.jpeg":     {"centre": "W", "stickers": "WWWWWWWWW"},
+    "WhatsApp Image 2026-09-25 at 2.23.08 AM (1).jpeg": {"centre": "O", "stickers": "YOOYORYYO"},
+    "WhatsApp Image 2026-09-25 at 2.23.08 AM (2).jpeg": {"centre": "G", "stickers": "GOGGGOGRG"},
+    "WhatsApp Image 2026-09-25 at 2.23.08 AM (3).jpeg": {"centre": "B", "stickers": "BBOGBRBOB"},
+    "WhatsApp Image 2026-09-25 at 2.23.08 AM (4).jpeg": {"centre": "B", "stickers": "BBOGBRBOB"}
+  }
+}

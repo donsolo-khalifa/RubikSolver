@@ -1,6 +1,6 @@
 # Cube Coach: Rubik's Cube Vision Solver
 
-Scan a 3x3 cube with your phone camera (through Iriun), then follow an animated 3D cube, one move at a time, with spoken instructions. Three methods: **Beginner** (default), **Intermediate** (2-look OLL/PLL) and **Advanced** (Kociemba). There's also a **Practice** mode that needs no camera. The design is in [PLAN.md](PLAN.md).
+Scan a 3x3 cube with your phone camera (through Iriun), then follow an animated 3D cube, one move at a time, with spoken instructions. Three methods: **Beginner** (default), **Intermediate** (2-look OLL/PLL) and **Advanced** (Kociemba). There's also a **Practice** mode that needs no camera.
 
 ## Setup
 
@@ -80,6 +80,6 @@ They cover: the cube model (every move against Kociemba's own example); 500 rand
 
 - **No real video test yet.** The pipeline is tuned on the 7 reference photos and on synthetic frames. Record 2–3 real scanning sessions with `tools/record.py` in your actual set-up, then check them with `debug_pipeline.py`.
 - **Sharpness check:** at warp resolution, the "blurry" red-face photo is no less sharp than the others (the blur is mostly in the background), so no threshold can flag it without also rejecting sharp faces. `MIN_SHARPNESS` is set low; tune it on recorded video.
-- **Yellow face not photographed yet.** It should have 1 red, 2 blue, 4 yellow and 2 green stickers (PLAN.md 5.0).
-- **Move counts** are higher than PLAN.md estimated: median 156 (Beginner), 131 (Intermediate), 21 (Advanced) over 300 scrambles. Intermediate reuses the Beginner first two layers, which alone take about 90 moves.
+- **Yellow face not photographed yet.** It should have 1 red, 2 blue, 4 yellow and 2 green stickers (worked out from the colour counts of the other five faces).
+- **Move counts** are higher than first estimated: median 156 (Beginner), 131 (Intermediate), 21 (Advanced) over 300 scrambles. Intermediate reuses the Beginner first two layers, which alone take about 90 moves.
 - Stretch goals (AR arrows on the video, camera-based move verification, algorithm trainer) are not built yet.
